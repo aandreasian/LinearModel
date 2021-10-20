@@ -14,18 +14,43 @@ require(tigerstats)
 
 ## Introduction
 
-Then form three regression models; Model1 is SIMS~ARM, Model2 is SIMS~GRIP, and Model3 is SIMS~ARM+GRIP. For each model find a 95% prediction interval of SIMS given a value of 94  for GRIP and 88 for ARM. Compare Model1 with Model3 using anova. Write it up in a markdown document, push the project up to your github account and submit it back to canvas as link. 
+Form three regression models; Model1 is SIMS~ARM, Model2 is SIMS~GRIP, and Model3 is SIMS~ARM+GRIP. For each model find a 95% prediction interval of SIMS given a value of 94  for GRIP and 88 for ARM. Compare Model1 with Model3 using anova. Write it up in a markdown document, push the project up to your github account and submit it back to canvas as link. 
 
 ## SIM~Arm 1st regression
 
+```{r}
+plot(SIMS~ARM,data=data)
+```
 
-##SIMS~ARM regression
+The greater the pounds of arm force(ARM), the greater the simulation(SIMS)
 
-##SIMS~GRIP regression
 
-##SIMS~ARM regression
+```{r}
+cor(SIMS~ARM,data=data)
+```
+This number is the correlation between SIMS and ARM force. Correlation is a measure of the linear association between the two variables.
 
-##SIMS~ARM+GRIP regression
+
+```{r}
+model.1 <- lm(SIMS~ARM,data=data)
+summary.lm(model.1)
+```
+
+The equation is -4.095160 +  0.054563 * ARM
+
+```{r}
+newData=data.frame(GRIP=94,ARM=88)
+predict.lm(model.1,newData, interval="prediction")
+```
+
+
+## SIMS~ARM regression
+
+## SIMS~GRIP regression
+
+## SIMS~ARM regression
+
+## SIMS~ARM+GRIP regression
 
 ## MODEL COMPARISSON
 
