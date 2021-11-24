@@ -114,7 +114,7 @@ model2 apperars to be slighlty better model because it has a  lower residual sta
 
 ## SIMS~ARM+GRIP regression
 
-
+   dndnklsa
 
 ## MODEL COMPARISSON
 
