@@ -114,22 +114,48 @@ model2 apperars to be slighlty better model because it has a  lower residual sta
 
 ## SIMS~ARM+GRIP regression
 
-   dndnklsa
-
-## MODEL COMPARISSON
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+advNN <- ggplot(data,aes(y=SIMS,x=ARM,z=GRIP))
 ```
 
-## Including Plots
+```{r}
+model.2 <- lm(SIMS~ARM + GRIP,data=data)
+summary.lm(model.1)
+``` 
 
-You can also embed plots, for example:
+model3 appears to be the better model because adjusted r squared score was higher than model2 and also scored lower in the residual standard error than model1 or model2.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+cor(SIMS~ARM+GRIP,data=data)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## prediction
+
+```{r}
+newData=data.frame(GRIP=94,ARM=88)
+predict.lm(model.2,newData, interval="prediction")
+```
+
+fit is the predicted SIMS score when you have a GRIP strength 94 and ARM strength of 88.
+
+The lower and upper are 95% confidence intervals for predicted SIMS score when the GRIP score is 94 and ARM strength of 88. 
+
+## Inferential tests 
+
+This is the inferential tests to compare models.
+
+The test is anova 
+
+$H_0$: Theres no difference in how well each model fit the data between models (model2,model3)
+
+$H_A$:  Theres is a difference in how well each model fit the data between models (model2,model3)
+
+```{r}
+anova(model.1,model.2)
+```
+
+The P- value is 0.00004994 which is very low .
+
+We reject the null hypothesis because the p value is too low. There is a difference between model2, and model3. We have evidence that model3 is btter than model2.
+
+
